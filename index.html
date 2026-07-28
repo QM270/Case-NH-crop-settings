@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ACS Crop Settings</title>
+<meta name="description" content="Factory Automatic Crop Settings reference for Case IH Axial-Flow and New Holland CR/CX combines.">
+<meta name="theme-color" content="#23262a">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="ACS Settings">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="ident">
+    <span class="ident-mark" id="brandMark">Case IH</span>
+    <span class="ident-text">
+      <span class="ident-name" id="machineName">Axial-Flow</span>
+      <span class="ident-sub">ACS recommended settings</span>
+    </span>
+  </header>
+
+  <section class="seg" aria-label="Brand">
+    <button class="seg-btn" type="button" data-brand="Case IH">Case IH</button>
+    <button class="seg-btn" type="button" data-brand="New Holland">New Holland</button>
+  </section>
+
+  <section class="group">
+    <h2 class="group-label">Machine configuration</h2>
+    <div class="machines" id="machines"></div>
+  </section>
+
+  <section class="group">
+    <div class="picker-head">
+      <h2 class="group-label">Crop</h2>
+      <button class="link-btn" type="button" id="btnManage">Manage list</button>
+    </div>
+    <input class="search" id="search" type="search" placeholder="Find a crop…" autocomplete="off" aria-label="Find a crop">
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <div class="terminal">
+    <div class="screen">
+      <div class="screen-head"><span class="screen-title">Recommended combine settings</span></div>
+      <div id="readout"></div>
+    </div>
+  </div>
+  <p class="prov" id="prov"></p>
+
+  <div class="actions">
+    <button class="act act-primary" type="button" id="btnEdit">Edit values</button>
+    <button class="act" type="button" id="btnShare">Share crop</button>
+    <button class="act" type="button" id="btnData">Backup</button>
+  </div>
+
+  <!-- editor -->
+  <section class="panel" id="editor" hidden>
+    <h2 class="panel-head" id="edHead">Edit</h2>
+    <p class="panel-note">Enter values as the monitor displays them. Blank clears a field. Fractions are fine — type <b>0 3/8</b>.</p>
+    <div id="edFields"></div>
+    <div class="actions">
+      <button class="act act-primary" type="button" id="btnSave">Save</button>
+      <button class="act" type="button" id="btnRevert">Restore factory</button>
+      <button class="act" type="button" id="btnCancelEdit">Cancel</button>
+    </div>
+  </section>
+
+  <!-- manage crop list -->
+  <section class="panel" id="manage" hidden>
+    <h2 class="panel-head">Crops shown</h2>
+    <p class="panel-note">Untick a crop to hide it from the list. Hidden crops keep their values.</p>
+    <div class="manage-actions">
+      <button class="link-btn" type="button" id="btnAll">Show all</button>
+      <button class="link-btn" type="button" id="btnNone">Hide all</button>
+      <button class="link-btn" type="button" id="btnOnlyData">Only crops with data</button>
+    </div>
+    <div id="manageList" class="manage-list"></div>
+    <div class="actions">
+      <button class="act act-primary" type="button" id="btnCloseManage">Done</button>
+    </div>
+  </section>
+
+  <!-- share -->
+  <section class="panel" id="share" hidden>
+    <h2 class="panel-head" id="shHead">Share</h2>
+    <p class="panel-note">Send these settings to someone without the app.</p>
+    <pre class="share-preview" id="sharePreview"></pre>
+    <div class="actions">
+      <button class="act act-primary" type="button" id="btnShareSend">Share…</button>
+      <button class="act" type="button" id="btnShareCopy">Copy text</button>
+      <button class="act" type="button" id="btnShareJson">Save JSON</button>
+      <button class="act" type="button" id="btnCloseShare">Close</button>
+    </div>
+  </section>
+
+  <!-- backup -->
+  <section class="panel" id="backup" hidden>
+    <h2 class="panel-head">Backup and restore</h2>
+    <p class="panel-note">Your edits and hidden-crop choices are saved on this device. Export a file to move them to another phone.</p>
+    <div class="actions">
+      <button class="act act-primary" type="button" id="btnExportAll">Export everything</button>
+      <button class="act" type="button" id="btnImportAll">Import file</button>
+      <button class="act act-danger" type="button" id="btnResetAll">Reset all to factory</button>
+      <button class="act" type="button" id="btnCloseBackup">Close</button>
+    </div>
+    <input type="file" id="fileInput" accept="application/json" hidden>
+    <p class="panel-note" id="storeNote"></p>
+  </section>
+
+  <footer class="foot">
+    <p><b>Blue</b> factory table from display firmware · <b>Green</b> confirmed against a real monitor · <b>Amber</b> your own value.</p>
+    <p id="footNote"></p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./data.js"></script>
+<script src="./app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
