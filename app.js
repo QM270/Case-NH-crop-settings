@@ -5,13 +5,13 @@
 const SCHEMAS = {
   rotary: [
     {key:'fanSpeed',   label:'Fan Speed',               unit:'rpm',  kind:'range'},
-    {key:'sieveUpper', label:'Sieve, upper',            unit:'inch', kind:'range'},
-    {key:'sieveLower', label:'Sieve, lower',            unit:'inch', kind:'range'},
+    {key:'sieveUpper', label:'Sieve, upper',            unit:'mm',   kind:'range'},
+    {key:'sieveLower', label:'Sieve, lower',            unit:'mm',   kind:'range'},
     {key:'rotorSpeed', label:'Rotor Speed',             unit:'rpm',  kind:'range'},
     {key:'concave',    label:'Concave Opening',         unit:'mm',   kind:'range'},
     {key:'spreader',   label:'Spreader Speed',          unit:'rpm',  kind:'range'},
     {key:'cageVanes',  label:'Cage Vanes',              unit:'%',    kind:'range'},
-    {key:'sievePre',   label:'Sieve, pre',              unit:'inch', kind:'range'},
+    {key:'sievePre',   label:'Sieve, pre',              unit:'mm',   kind:'range'},
     {key:'feeder',     label:'Feeder Speed',            unit:'rpm',  kind:'range'},
     {key:'spiked',     label:'Spiked Rasp Bars',        unit:'',     kind:'single'},
     {key:'nonSpiked',  label:'Non Spiked Rasp Bars',    unit:'',     kind:'single'},
