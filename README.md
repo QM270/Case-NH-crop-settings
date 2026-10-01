@@ -4,21 +4,6 @@ A phone-friendly reference for the Automatic Crop Settings (ACS) recommended com
 settings used by Case IH Axial-Flow and New Holland CR/CX combines. Installs to a
 home screen on iOS and Android, works offline, and needs no server.
 
-## Put it online
-
-1. Create a new GitHub repository and upload every file in this folder, keeping the
-   `icons/` folder intact.
-2. Repository **Settings → Pages → Build and deployment**, source **Deploy from a
-   branch**, branch `main`, folder `/ (root)`. Save.
-3. After a minute the site is live at `https://<user>.github.io/<repo>/`.
-
-The `.nojekyll` file is an empty, zero-byte file. GitHub Pages only checks whether it
-exists. It isn't strictly required here — Jekyll only skips files and folders whose
-names start with `_` or `.`, and this project has none — but it's cheap insurance if
-you later add a folder like `_data`. If it's easier, create it directly on GitHub:
-**Add file → Create new file**, type `.nojekyll` as the name, leave the body blank,
-and commit.
-
 ## Install on a phone
 
 - **iPhone/iPad** — open the URL in Safari, tap Share, then *Add to Home Screen*.
